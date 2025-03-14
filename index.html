@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <h2>Enter URL to Shorten</h2>
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="shortenURL()">Shorten</button>
+    <p id="shortenedURL"></p>
+    <script>
+        function shortenURL() {
+            let url = document.getElementById("urlInput").value;
+            fetch("https://your-api-endpoint/shorten", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "original_url": url })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("shortenedURL").innerText = data.short_url);
+        }
+    </script>
+</body>
+</html>
